@@ -1,0 +1,234 @@
+<title>Client Reporting Dashboard</title>
+<!--
+  TEMPLATE — the sellable NewFinera client dashboard product.
+  Fill in every [bracketed] value from that client's reconciliation workpaper
+  before delivery. All figures below are EXAMPLE DATA, clearly marked — never
+  ship this file with example numbers still in it. See docs/SERVICE-MODEL.md
+  "Client Reporting Dashboard (product)" for the tailoring checklist.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* Layout: dark-executive KPI dashboard — header, 4-tile KPI row, two-column chart grid, exceptions rail */
+  :root{
+    --bg:#F4F7F1; --surface:#FFFFFF; --surface-2:#EAEFE4;
+    --ink:#16211A; --ink-soft:#55604F; --line:#D7DDCE;
+    --accent:#1F6F4F; --accent-strong:#144936; --accent-soft:#E0ECE2;
+    --amber:#B9671F; --amber-soft:#F3E3CF;
+    --blue:#3D6690; --blue-soft:#DEE6EE;
+    --bad:#A13B3B; --bad-soft:#F6DEDE;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0D120D; --surface:#141B13; --surface-2:#1A2318;
+      --ink:#EAF0E6; --ink-soft:#9FAC97; --line:#283229;
+      --accent:#57B586; --accent-strong:#8AD9AE; --accent-soft:#1C2E22;
+      --amber:#E0A355; --amber-soft:#3A2C17;
+      --blue:#8DB2D6; --blue-soft:#1E2A36;
+      --bad:#E18989; --bad-soft:#3A1F1F;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0D120D; --surface:#141B13; --surface-2:#1A2318;
+    --ink:#EAF0E6; --ink-soft:#9FAC97; --line:#283229;
+    --accent:#57B586; --accent-strong:#8AD9AE; --accent-soft:#1C2E22;
+    --amber:#E0A355; --amber-soft:#3A2C17;
+    --blue:#8DB2D6; --blue-soft:#1E2A36;
+    --bad:#E18989; --bad-soft:#3A1F1F;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{ background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:28px 20px 64px; display:flex; flex-direction:column; gap:22px; }
+
+  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; margin:0; text-wrap:balance; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  .template-banner{ background:var(--bad-soft); border:1px solid var(--bad); color:var(--bad); border-radius:10px; padding:10px 14px; font-family:'IBM Plex Mono', monospace; font-size:.78rem; font-weight:600; }
+
+  header.top{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:16px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+  .brand{ display:flex; flex-direction:column; gap:4px; }
+  .brand .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:500; }
+  .brand h1{ font-size:1.9rem; font-weight:700; }
+  .client-meta{ display:flex; flex-direction:column; gap:3px; align-items:flex-end; text-align:right; }
+  .client-meta .name{ font-size:1.05rem; font-weight:600; }
+  .client-meta .period{ font-family:'IBM Plex Mono', monospace; font-size:.8rem; color:var(--ink-soft); }
+
+  .kpi-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media (max-width:760px){ .kpi-row{ grid-template-columns:repeat(2,1fr); } }
+  .kpi{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 18px 16px; display:flex; flex-direction:column; gap:10px; }
+  .kpi .label{ font-family:'IBM Plex Mono', monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:500; }
+  .kpi .value{ font-family:'Fraunces', serif; font-size:2.1rem; font-weight:700; line-height:1; }
+  .kpi .sub{ font-size:.78rem; color:var(--ink-soft); }
+  .kpi .delta{ display:inline-flex; align-items:center; gap:4px; font-family:'IBM Plex Mono', monospace; font-size:.74rem; font-weight:600; width:fit-content; padding:2px 8px; border-radius:999px; }
+  .delta.good{ background:var(--accent-soft); color:var(--accent-strong); }
+  .delta.warn{ background:var(--amber-soft); color:var(--amber); }
+
+  .grid-2{ display:grid; grid-template-columns:1.5fr 1fr; gap:14px; align-items:stretch; }
+  @media (max-width:860px){ .grid-2{ grid-template-columns:1fr; } }
+
+  .panel{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px 22px 18px; display:flex; flex-direction:column; gap:14px; }
+  .panel h2{ font-size:1.05rem; font-weight:600; }
+  .panel .hint{ font-size:.8rem; color:var(--ink-soft); margin-top:-8px; }
+
+  .chart-wrap{ overflow-x:auto; }
+  .chart-wrap svg{ display:block; width:100%; height:auto; min-width:480px; }
+
+  .legend{ display:flex; flex-wrap:wrap; gap:14px; font-size:.8rem; color:var(--ink-soft); }
+  .legend .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+
+  .donut-figure{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .donut-key{ display:flex; flex-direction:column; gap:10px; flex:1; min-width:160px; }
+  .donut-key .row{ display:flex; justify-content:space-between; gap:10px; font-size:.85rem; }
+  .donut-key .row .name{ display:flex; align-items:center; gap:8px; }
+  .donut-key .row .amt{ font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); }
+
+  .gateway-row{ display:flex; flex-direction:column; gap:6px; }
+  .gateway-row .head{ display:flex; justify-content:space-between; font-size:.85rem; }
+  .gateway-row .head .net{ font-family:'IBM Plex Mono', monospace; font-weight:600; }
+  .bar-track{ height:14px; border-radius:7px; background:var(--surface-2); overflow:hidden; display:flex; }
+  .bar-track .seg-net{ background:var(--accent); height:100%; }
+  .bar-track .seg-refund{ background:var(--bad); height:100%; }
+  .gateway-foot{ font-family:'IBM Plex Mono', monospace; font-size:.72rem; color:var(--ink-soft); }
+
+  .flag{ display:flex; gap:12px; align-items:flex-start; background:var(--amber-soft); border:1px solid var(--amber); border-radius:12px; padding:14px 16px; }
+  .flag .tag{ font-family:'IBM Plex Mono', monospace; font-size:.7rem; font-weight:600; letter-spacing:.06em; color:var(--amber); white-space:nowrap; padding-top:2px; }
+  .flag p{ margin:0; font-size:.86rem; line-height:1.55; color:var(--ink); }
+
+  .exceptions{ display:flex; flex-direction:column; gap:10px; }
+  .exceptions .stat{ display:flex; align-items:baseline; gap:10px; }
+  .exceptions .stat .n{ font-family:'Fraunces', serif; font-size:2.4rem; font-weight:700; color:var(--bad); }
+  .exceptions .stat .n-label{ font-size:.85rem; color:var(--ink-soft); }
+  .exceptions ul{ margin:0; padding-left:18px; font-size:.82rem; color:var(--ink-soft); display:flex; flex-direction:column; gap:4px; }
+
+  footer{ border-top:1px solid var(--line); padding-top:16px; font-size:.8rem; color:var(--ink-soft); line-height:1.6; }
+</style>
+
+<div class="wrap">
+
+  <div class="template-banner">TEMPLATE — every figure below is example data. Replace every [bracket] and example number from the client's workpaper before delivery. Delete this banner once populated.</div>
+
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">NewFinera — Client Reporting</span>
+      <h1>Reconciliation Dashboard</h1>
+    </div>
+    <div class="client-meta">
+      <span class="name">[Client Business Name]</span>
+      <span class="period mono">[Reporting period] · [N] transactions reconciled</span>
+    </div>
+  </header>
+
+  <section class="kpi-row">
+    <div class="kpi">
+      <span class="label">Net Revenue</span>
+      <span class="value mono">$[00,000]</span>
+      <span class="sub">[Revenue measure], after refunds/adjustments</span>
+      <span class="delta good">Ties to workpaper · [N] exceptions</span>
+    </div>
+    <div class="kpi">
+      <span class="label">[Volume metric — e.g. Orders, Invoices]</span>
+      <span class="value mono">[0,000]</span>
+      <span class="sub">[status breakdown, e.g. N paid · N refunded]</span>
+      <span class="delta good">[N]% refunded or partial</span>
+    </div>
+    <div class="kpi">
+      <span class="label">[Average metric — e.g. Avg. Order Value]</span>
+      <span class="value mono">$[00.00]</span>
+      <span class="sub">[how it's calculated]</span>
+      <span class="delta good">[one-line standout fact]</span>
+    </div>
+    <div class="kpi">
+      <span class="label">[Risk metric — e.g. Refund Rate]</span>
+      <span class="value mono">[0.00]%</span>
+      <span class="sub">$[0,000] of $[00,000] gross</span>
+      <span class="delta warn">[what to watch]</span>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <h2>[Trend chart title — e.g. Weekly orders &amp; revenue]</h2>
+      <p class="hint">[Chart legend/axis explanation]</p>
+      <div class="chart-wrap">
+        <!--
+          SVG trend chart: reuse the bar+line combo from the worked example
+          (see git history of this file, or the published Shopify-client
+          artifact referenced in SERVICE-MODEL.md) and recompute coordinates
+          from this client's actual period data. Do not reuse example
+          coordinates with a different client's numbers.
+        -->
+        <svg viewBox="0 0 640 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="[Describe chart contents]">
+          <text x="320" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="var(--ink-soft)">[Chart — recompute from this client's period data]</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--accent)"></span>[Series 1 name]</span>
+        <span><span class="dot" style="background:var(--amber)"></span>[Series 2 name]</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>[Breakdown chart title — e.g. Net revenue by product/service line]</h2>
+      <p class="hint">[What the split represents]</p>
+      <div class="donut-figure">
+        <svg viewBox="0 0 180 180" width="160" height="160" role="img" aria-label="[Describe donut contents]">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="var(--surface-2)" stroke-width="22"></circle>
+          <text x="90" y="90" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">[recompute arcs]</text>
+        </svg>
+        <div class="donut-key">
+          <div class="row"><span class="name"><span class="dot" style="background:var(--accent)"></span>[Category A]</span><span class="amt">[00.0]% · $[0.0k]</span></div>
+          <div class="row"><span class="name"><span class="dot" style="background:var(--blue)"></span>[Category B]</span><span class="amt">[00.0]% · $[0.0k]</span></div>
+          <div class="row"><span class="name"><span class="dot" style="background:var(--amber)"></span>[Category C]</span><span class="amt">[00.0]% · $[0.0k]</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <h2>[Reconciliation by channel/source — e.g. payment gateway, cost centre]</h2>
+      <p class="hint">Bar length = total value · highlighted segment = exceptions/refunds</p>
+
+      <div class="gateway-row">
+        <div class="head"><span>[Channel A] · [N] transactions</span><span class="net mono">net $[00,000.00]</span></div>
+        <div class="bar-track"><div class="seg-net" style="width:[00]%"></div><div class="seg-refund" style="width:[00]%"></div></div>
+        <div class="gateway-foot">$[00,000.00] total · $[0,000.00] refunded/adjusted</div>
+      </div>
+
+      <div class="gateway-row">
+        <div class="head"><span>[Channel B] · [N] transactions</span><span class="net mono">net $[00,000.00]</span></div>
+        <div class="bar-track"><div class="seg-net" style="width:[00]%"></div><div class="seg-refund" style="width:[00]%"></div></div>
+        <div class="gateway-foot">$[00,000.00] total · $[0,000.00] refunded/adjusted</div>
+      </div>
+
+      <!-- Keep this flag only if a real jurisdiction/compliance exception was found; delete the block otherwise, never leave a placeholder risk claim in a delivered dashboard -->
+      <div class="flag">
+        <span class="tag">[FLAG TYPE]</span>
+        <p>[State the actual exception found, e.g. a tax-rate mismatch, a reporting-basis conflict — only if genuinely present in this client's data; cite what was checked and when]</p>
+      </div>
+    </div>
+
+    <div class="panel exceptions">
+      <h2>Exceptions register</h2>
+      <div class="stat">
+        <span class="n mono">[N]</span>
+        <span class="n-label">[what these exceptions are]<br>— carried individually,<br>none netted away</span>
+      </div>
+      <ul>
+        <li>[Exception category 1 — count]</li>
+        <li>[Exception category 2 — count]</li>
+        <li>Full detail in the reconciliation workpaper</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Prep only — this dashboard does not lodge, file or pay on the client's behalf. Figures tie to the
+    reconciliation workpaper's tie-out proof ([describe the specific tie-out check and its result]).
+    Reviewer sign-off pending.
+  </footer>
+
+</div>

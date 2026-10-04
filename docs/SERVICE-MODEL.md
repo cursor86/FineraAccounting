@@ -53,6 +53,36 @@ compliance work (`stp-finalisation`, `div7a-compliance`, `fbt-annual-workflow`,
 available the moment a client needs it — none of it requires new tooling,
 just the relevant skill invoked.
 
+### 5. Client Reporting Dashboard (product)
+
+A sellable deliverable, not just an internal report: a tailored, branded
+dashboard built from each client's reconciliation data. It's the concrete
+form of the "KPI dashboards" already promised under Virtual CFO & Management
+Accounts — and can also be sold standalone, to a client who only wants the
+dashboard without the full monthly engagement.
+
+**Build it from** `docs/templates/client-dashboard-template.html` — fill
+every bracketed placeholder and example number from that client's actual
+reconciliation workpaper. Never ship it with template example data still in
+place; never commit a filled-in copy (with real client figures) to this
+repo — it's a client deliverable, handed off or published for that client
+only, per `CLAUDE.md`'s data-handling rule.
+
+**Tailoring checklist per client:**
+
+| What varies | Examples |
+|---|---|
+| KPI tiles | Revenue measure, volume metric, and risk metric depend on the business — an e-commerce client wants refund rate; a contracting client wants WIP over/under-billing |
+| Breakdown chart | Product/service line, cost centre, project, or whatever dimension the client's business actually segments by |
+| Channel/source reconciliation | Payment gateways for e-commerce; progress claims and retentions for contracting; bank accounts for a simple services business |
+| Jurisdiction/compliance flag | Only included when a real exception is found in that client's data — never a placeholder risk claim |
+
+**What stays fixed across every client**: the visual system (palette,
+typography, layout), the tie-out discipline (every figure traces to the
+workpaper, 0 unexplained variance), and the prep-only footer. That
+consistency is what makes it a product line instead of a one-off design
+exercise each time.
+
 ## Engagement lifecycle
 
 1. **Intake.** Fill in `docs/templates/client-finance-officer-brief.md` for
@@ -74,7 +104,10 @@ just the relevant skill invoked.
    smoothed over.
 5. **Delivery.** The signed-off workpaper goes to the client or to
    NewFinera's registered agent for lodgment. This pipeline never lodges,
-   files, or pays on the client's behalf.
+   files, or pays on the client's behalf. Where the engagement includes the
+   Client Reporting Dashboard product, this step also means filling
+   `docs/templates/client-dashboard-template.html` from the same reconciled
+   figures and handing over the published dashboard alongside the workpaper.
 
 ## Data handling
 
