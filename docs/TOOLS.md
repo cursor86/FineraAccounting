@@ -10,6 +10,7 @@ architecture reviewed in-session; kept here so it travels with the repo.
 | General finance skills | `openaccountant/skills` | 44 broader personal/business finance skills, not AU-specific | **Available, secondary** — use outside the AU practice scope, not the default path |
 | Xero live API connection | `XeroAPI/xero-agent-toolkit` | Reference agents (LangChain, OpenAI Agents SDK, Google ADK) pulling live Xero data via the Xero MCP Server | **Deferred** — needs a Xero Developer Custom Connection app; no budget allocated. Manual exports substitute for it |
 | Client onboarding / KYB | `ballerine-io/ballerine` | Identity verification, case management for onboarding | **Shelved** — evaluated, not a fit for the current service lines |
+| Actuarial cash flow modeling | `acturtle/cashflower` | Open-source Python framework for actuarial cash flow models (mortality/survival-based projections) — insurance and pension work | **Parked** — noted for future reference only, no current NewFinera service line uses it |
 
 ## Why Xero's live API is deferred, not abandoned
 
@@ -25,3 +26,12 @@ Ballerine solves client *onboarding* (identity verification, KYB) — a
 different problem from bookkeeping and management accounts. It's worth
 revisiting only if manual client onboarding becomes an actual bottleneck,
 which isn't the case at NewFinera's current scale.
+
+## Why Cashflower is parked, not adopted
+
+Cashflower solves actuarial cash flow modeling (mortality/survival-based
+projections for insurance and pensions) — a different discipline from AU
+bookkeeping, BAS, or Virtual CFO work, with no overlap with any current
+service line in `SERVICE-MODEL.md`. Recorded here so it's easy to find again
+if NewFinera ever takes on insurance or pension-adjacent clients; not
+something to wire in without that need materialising first.

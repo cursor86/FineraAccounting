@@ -15,6 +15,7 @@ workpapers and identifiers never get committed here — see
 |---|---|
 | [`docs/SERVICE-MODEL.md`](docs/SERVICE-MODEL.md) | The client engagement model: intake → processing → review → delivery, per service line |
 | [`docs/TOOLS.md`](docs/TOOLS.md) | The assembled toolkit, what each piece does, and its current status |
+| [`docs/REPORTING-STANDARDS.md`](docs/REPORTING-STANDARDS.md) | Current AU financial reporting framework (AASB 1060 Tier 2, AASB S2 climate disclosure phase-in) — checked against primary sources, re-verify before relying on it |
 | [`CLAUDE.md`](CLAUDE.md) | Operating rules for any agent (Claude Code or otherwise) working in this repo |
 
 ## Status, in one line
