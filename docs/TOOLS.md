@@ -11,6 +11,7 @@ architecture reviewed in-session; kept here so it travels with the repo.
 | Xero live API connection | `XeroAPI/xero-agent-toolkit` | Reference agents (LangChain, OpenAI Agents SDK, Google ADK) pulling live Xero data via the Xero MCP Server | **Deferred** — needs a Xero Developer Custom Connection app; no budget allocated. Manual exports substitute for it |
 | Client onboarding / KYB | `ballerine-io/ballerine` | Identity verification, case management for onboarding | **Shelved** — evaluated, not a fit for the current service lines |
 | Actuarial cash flow modeling | `acturtle/cashflower` | Open-source Python framework for actuarial cash flow models (mortality/survival-based projections) — insurance and pension work | **Parked** — noted for future reference only, no current NewFinera service line uses it |
+| Client dashboard add-ons | Fathom, Syft Analytics, LivePlan (commercial, not repos) | Polished, auto-refreshing P&L/KPI dashboards and forecast-vs-actual reporting, built on top of Xero/QuickBooks | **Deferred** — same blocker as the live Xero API: all three need a live accounting-platform connection to pull data automatically, which isn't funded yet |
 
 ## Why Xero's live API is deferred, not abandoned
 
