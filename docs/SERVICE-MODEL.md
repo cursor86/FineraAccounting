@@ -55,10 +55,12 @@ just the relevant skill invoked.
 
 ## Engagement lifecycle
 
-1. **Intake.** Entity type, GST registration basis (cash/accruals), lodgment
-   cycle, prior-period figures, and which system the client uses (Xero or
-   MYOB). No automated onboarding/KYB tool is in this pipeline — intake is
-   manual for now (see `docs/TOOLS.md` for why Ballerine was set aside).
+1. **Intake.** Fill in `docs/templates/client-finance-officer-brief.md` for
+   the client (business name, type, country, top goals), plus entity type,
+   GST registration basis (cash/accruals), lodgment cycle, prior-period
+   figures, and which system the client uses (Xero or MYOB). No automated
+   onboarding/KYB tool is in this pipeline — intake is manual for now (see
+   `docs/TOOLS.md` for why Ballerine was set aside).
 2. **Data collection.** The client (or NewFinera, with their login) exports
    the relevant reports — Activity Statement, trial balance, GL detail,
    payroll summary. The `xero-exports` skill handles Xero's report quirks;

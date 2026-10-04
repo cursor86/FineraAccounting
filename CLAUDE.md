@@ -23,12 +23,25 @@ output, ask where NewFinera's firm-approved secure storage is before writing
 anything — don't default to a repo-adjacent folder, and don't edit
 `.gitignore` to accommodate one without explicit approval.
 
+## Client-facing response format
+
+Once a client's Finance Officer brief (`docs/templates/client-finance-officer-brief.md`)
+is filled in for an engagement, shape client-facing answers as: **Executive
+Summary** (the answer, first sentence) → **Financial Analysis/Breakdown** →
+**Strategic Recommendations** (2-3 concrete actions) → **Data Requirements**
+(what's missing, if anything). This is presentation, not a substitute for the
+underlying workpaper — the workpaper still carries the tie-out proof,
+exceptions list, and reviewer sign-off line; this format is how its findings
+get narrated back to the client.
+
 ## Where things live
 
 | Path | Contents |
 |---|---|
 | `docs/SERVICE-MODEL.md` | Service lines mapped to workflows, engagement lifecycle, expansion plan |
 | `docs/TOOLS.md` | The assembled toolkit and each component's status |
+| `docs/REPORTING-STANDARDS.md` | Current AU financial reporting framework (AASB 1060, AASB S2) |
+| `docs/templates/client-finance-officer-brief.md` | Fill-in template run at the start of every new client engagement |
 
 ## Using the toolkit
 
