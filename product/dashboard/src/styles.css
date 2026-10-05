@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  NewFinera dashboard palette — fixed dark theme per product spec
+  (background #0d1117, card #161b22, border #30363d), expressed as the
+  handful of CSS variables the dashboard components actually use.
+*/
+@layer base {
+  :root {
+    --background: 215 28% 7%;
+    --foreground: 210 20% 92%;
+
+    --card: 215 21% 11%;
+    --card-foreground: 210 20% 92%;
+
+    --secondary: 215 12% 21%;
+    --muted-foreground: 215 8% 59%;
+
+    --border: 215 12% 21%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

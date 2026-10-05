@@ -1,14 +1,7 @@
-import React from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import DashboardHome from '@/pages/DashboardHome';
 
-import AppRoutes from '@common/routes/AppRoutes';
-
-const App: React.FC = () => {
-  return (
-    <Router>
-      <AppRoutes />
-    </Router>
-  );
-};
+function App() {
+  return <DashboardHome />;
+}
 
 export default App;
