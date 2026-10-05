@@ -61,7 +61,21 @@ form of the "KPI dashboards" already promised under Virtual CFO & Management
 Accounts — and can also be sold standalone, to a client who only wants the
 dashboard without the full monthly engagement.
 
-**Two implementations, pick by what the client needs:**
+**Feeding it real numbers**: `docs/templates/3-statement-model-template.xlsx` is the
+intake-to-output engine — a client (or new prospect from rizzdigitalsolutions'
+bundled offer) supplies one tagged trial balance (account name, category,
+prior and current period closing balances) on its Trial Balance Input tab,
+and P&L, Balance Sheet, and Cash Flow (indirect method) calculate
+automatically, plus a Dashboard tab with the same KPIs the React product
+below presents. Both statements' tie-out checks (Assets = Liabilities +
+Equity; computed closing cash = Balance Sheet cash) are built in and flag
+an exception rather than silently absorbing a miscategorised account. See
+the workbook's own Instructions tab. Its Dashboard tab's figures are what
+get carried into the React product's `*Card.tsx` files per the tailoring
+checklist below — the xlsx model and the dashboard present the same numbers,
+not two separate calculations.
+
+**Two dashboard implementations, pick by what the client needs:**
 
 - `product/dashboard/` — the React build (Vite + TypeScript + Tailwind +
   Recharts). Use this by default: it compiles at build time, so there's no
