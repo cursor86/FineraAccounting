@@ -61,12 +61,24 @@ form of the "KPI dashboards" already promised under Virtual CFO & Management
 Accounts — and can also be sold standalone, to a client who only wants the
 dashboard without the full monthly engagement.
 
-**Build it from** `docs/templates/client-dashboard-template.html` — fill
-every bracketed placeholder and example number from that client's actual
-reconciliation workpaper. Never ship it with template example data still in
-place; never commit a filled-in copy (with real client figures) to this
-repo — it's a client deliverable, handed off or published for that client
-only, per `CLAUDE.md`'s data-handling rule.
+**Two implementations, pick by what the client needs:**
+
+- `product/dashboard/` — the React build (Vite + TypeScript + Tailwind +
+  Recharts). Use this by default: it compiles at build time, so there's no
+  runtime CDN dependency and no risk of a script failing to load for the
+  client. Populate `src/components/dashboard/*Card.tsx` with that client's
+  real figures per the checklist below, run `pnpm run build`, and confirm it
+  completes with zero TypeScript errors before delivery. See
+  `product/dashboard/README.md`.
+- `docs/templates/client-dashboard-template.html` — a static HTML/CSS/SVG
+  fallback for a one-off delivery where standing up the React project isn't
+  worth it. Fill every bracketed placeholder and example number from the
+  client's workpaper.
+
+Either way: never ship with template example data still in place, and never
+commit a filled-in copy (with real client figures) to this repo — it's a
+client deliverable, handed off or published for that client only, per
+`CLAUDE.md`'s data-handling rule.
 
 **Tailoring checklist per client:**
 
