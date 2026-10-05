@@ -75,7 +75,17 @@ misspelled category, and records entity type (which relabels equity and
 raises a Division 7A review note for companies) and GST basis. An optional
 Monthly tab carries 12 months of revenue, net profit and cash for the web
 dashboard's month-by-month charts, checked back to the P&L and Balance
-Sheet. See the workbook's own Instructions tab. Its Dashboard tab's figures are what
+Sheet. See the workbook's own Instructions tab.
+
+**From model to client web page**: `python3 tools/dashboard_from_model.py
+CLIENT.xlsx -o OUT.html --notes notes.txt --prepared-by "Name, ACCA"` reads the
+filled model's computed cells and writes one self-contained HTML dashboard
+(headline cards, monthly or year-on-year charts, KPIs, the three statements,
+the accountant's notes, and a blank reviewer sign-off). It refuses to build
+while either tie-out check fails or any trial balance row is uncategorised
+(`--draft` gives an internal preview with a DRAFT banner). Without `--notes` it
+lists auto-generated discussion points, labelled for review. Write the output
+to the firm's secure client storage, never into this repo. Its Dashboard tab's figures are what
 get carried into the React product's `*Card.tsx` files per the tailoring
 checklist below — the xlsx model and the dashboard present the same numbers,
 not two separate calculations.
