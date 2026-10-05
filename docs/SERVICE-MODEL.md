@@ -69,8 +69,13 @@ and P&L, Balance Sheet, and Cash Flow (indirect method) calculate
 automatically, plus a Dashboard tab with the same KPIs the React product
 below presents. Both statements' tie-out checks (Assets = Liabilities +
 Equity; computed closing cash = Balance Sheet cash) are built in and flag
-an exception rather than silently absorbing a miscategorised account. See
-the workbook's own Instructions tab. Its Dashboard tab's figures are what
+an exception rather than silently absorbing a miscategorised account. The
+input tab takes up to 200 accounts, flags any row with a missing or
+misspelled category, and records entity type (which relabels equity and
+raises a Division 7A review note for companies) and GST basis. An optional
+Monthly tab carries 12 months of revenue, net profit and cash for the web
+dashboard's month-by-month charts, checked back to the P&L and Balance
+Sheet. See the workbook's own Instructions tab. Its Dashboard tab's figures are what
 get carried into the React product's `*Card.tsx` files per the tailoring
 checklist below — the xlsx model and the dashboard present the same numbers,
 not two separate calculations.
