@@ -1,5 +1,9 @@
 # FineraAccounting
 
+**AI-assisted bookkeeping and reporting pipeline for small businesses:** client Xero/MYOB exports in, a tied-out 3-statement model and a client web dashboard out.
+
+![Python](https://img.shields.io/badge/Python-3-3776AB) ![React](https://img.shields.io/badge/React-Vite-61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6) ![Excel](https://img.shields.io/badge/Excel-3--statement_model-217346) ![AU standards](https://img.shields.io/badge/AU-AASB_1060-0B3D91)
+
 The operating model for NewFinera's AI-assisted client work: how the tools we've
 assembled turn a client's raw records into a review-ready deliverable, for
 every service on [newfinera.com](https://newfinera.com).
@@ -28,3 +32,17 @@ Manual-data pipeline is ready to run today. Xero's live API is intentionally
 out of scope for now (no budget for API access) — clients' Xero/MYOB exports
 are the input instead. AML/KYC tooling was evaluated (Ballerine) and shelved —
 not a fit for a bookkeeping/Virtual CFO practice at this stage.
+
+## Highlights
+
+- **Tie-out before output:** the dashboard builder refuses to run while the 3-statement model's checks fail, so numbers that don't balance never reach a client.
+- **Human in the loop:** every workflow ends at a review-ready output with a reviewer sign-off line. Nothing is lodged or filed automatically.
+- **Privacy by design:** no client data is ever committed. This repo holds the model, templates and tools only.
+
+## Credits
+
+Workflow skills draw on [`ryanduguid/australian-accounting-skills`](https://github.com/ryanduguid/australian-accounting-skills) and AU tax guides on [`openaccountants/openaccountants`](https://github.com/openaccountants/openaccountants), with thanks to their authors.
+
+## How this was built
+
+Built by **Rizz** for [NewFinera](https://newfinera.com) using AI-assisted development (Claude Code). My role: the service model, finance and reporting design, tie-out rules, testing and deployment.
